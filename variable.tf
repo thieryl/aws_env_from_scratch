@@ -9,7 +9,7 @@ variable "aws_profile" {
 }
 
 variable "key_name" {
-  default     = "cout"
+  default     = "myaws"
   description = "the ssh key to use in the EC2 machines"
 }
 variable "credentialsfile" {
@@ -17,7 +17,7 @@ variable "credentialsfile" {
   description = "where your access and secret_key are stored, you create the file when you run the aws config"
 }
 variable "vpc_cidr" {
-  default = "10.20.0.1/16"
+  default = "10.20.0.0/16"
 }
 
 variable "public_subnets_cidr" {
@@ -37,7 +37,7 @@ variable "azs" {
 }
 
 variable "webserver-ami" {
-  default = "ami-0ff8a91507f77f867"
+  default = "ami-0ce71448843cb18a1"
 }
 
 variable "instance_type" {

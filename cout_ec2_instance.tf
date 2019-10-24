@@ -1,9 +1,14 @@
 # create ec2 instances
 resource "aws_instance" "webserver" {
-  ami_id        = "${var.webserver-ami}"
+  count         = "${length(var.public_subnets_cidr)}"
+  ami           = "${var.webserver-ami}"
   instance_type = "${var.instance_type}"
 
-  tag {
+  tags {
     Name = "webServer-${count.index}"
   }
+}
+
+output "public_ip" {
+  value = "${aws_instance.webserver.*.private_ip}"
 }
