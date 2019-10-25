@@ -1,25 +1,30 @@
-resource "aws_subnet" "PublicAZA" {
-  vpc_id            = "${aws_vpc.main.id}"
-  cidr_block        = "${var.public_subnets_cidr}"
-  availability_zone = ["${var.azs}"]
-  tags {
-    Name = "PublicAZA"
+# Subnets : public
+resource "aws_subnet" "public" {
+  count             = length(var.public_subnets_cidr)
+  vpc_id            = aws_vpc.main.id
+  cidr_block        = element(var.public_subnets_cidr, count.index)
+  availability_zone = element(var.azs, count.index)
+  tags = {
+    Name = "Subnet-${count.index + 1}"
   }
+}
 
-}
-resource "aws_route_table_association" "PublicAZA" {
-  subnet_id      = "${aws_subnet.PublicAZA.id}"
-  route_table_id = "${aws_route_table.public.id}"
-}
-resource "aws_subnet" "PrivateAZA" {
-  vpc_id     = "${aws_vpc.main.id}"
-  cidr_block = "${var.private_subnets_cidr}"
-  tags {
-    Name = "PublicAZB"
+# Route table: attach Internet Gateway
+resource "aws_route_table" "public_rt" {
+  vpc_id = aws_vpc.main.id
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.ckout_igw.id
   }
-  availability_zone = ["${var.aws_availability_zones}"]
+  tags = {
+    Name = "publicRouteTable"
+  }
 }
-resource "aws_route_table_association" "PrivateAZA" {
-  subnet_id      = "${aws_subnet.PrivateAZA.id}"
-  route_table_id = "${aws_route_table.private.id}"
+
+# Route table association with public subnets
+resource "aws_route_table_association" "a" {
+  count          = length(var.public_subnets_cidr)
+  subnet_id      = element(aws_subnet.public.*.id, count.index)
+  route_table_id = aws_route_table.public_rt.id
 }
+

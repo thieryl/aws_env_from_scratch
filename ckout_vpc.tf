@@ -1,10 +1,11 @@
 # Create aws VPC
 resource "aws_vpc" "main" {
-  cidr_block = "${var.vpc_cidr}"
+  cidr_block = var.vpc_cidr
+
   #### this 2 true values are for use the internal vpc dns resolution
   enable_dns_support   = true
   enable_dns_hostnames = true
-  tags {
+  tags = {
     Name = "My terraform vpc"
   }
 
@@ -12,3 +13,4 @@ resource "aws_vpc" "main" {
     create_before_destroy = "true"
   }
 }
+

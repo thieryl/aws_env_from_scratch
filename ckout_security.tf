@@ -2,11 +2,12 @@
 resource "aws_security_group" "webservers" {
   name        = "allow_http"
   description = "Allow http inbound traffic"
+
   //vpc_id      = "${aws_vpc.main.id}"
 
   ingress {
-    from_port   = "${var.http_port}"
-    to_port     = "${var.http_port}"
+    from_port   = var.http_port
+    to_port     = var.http_port
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
@@ -32,7 +33,7 @@ resource "aws_security_group" "webservers" {
 resource "aws_security_group" "database" {
   name        = "allow_mysql"
   description = "Allow mysql inbound traffic"
-  vpc_id      = "${aws_vpc.main.id}"
+  vpc_id      = aws_vpc.main.id
 
   ingress {
     from_port   = 3306
@@ -56,11 +57,12 @@ resource "aws_security_group" "database" {
 # ELB SG
 resource "aws_security_group" "ckout_elb" {
   name = "Ckout-ELB"
+
   //vpc_id = "${aws_vpc.main.id}"
 
   ingress {
-    from_port   = "${var.http_port}"
-    to_port     = "${var.http_port}"
+    from_port   = var.http_port
+    to_port     = var.http_port
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
@@ -71,5 +73,4 @@ resource "aws_security_group" "ckout_elb" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
-
 
