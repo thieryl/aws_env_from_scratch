@@ -1,10 +1,11 @@
 resource "aws_subnet" "PublicAZA" {
-  vpc_id     = "${aws_vpc.main.id}"
-  cidr_block = "${var.public_subnets_cidr}"
+  vpc_id            = "${aws_vpc.main.id}"
+  cidr_block        = "${var.public_subnets_cidr}"
+  availability_zone = ["${var.azs}"]
   tags {
     Name = "PublicAZA"
   }
-  availability_zone = ["${var.azs.id}"]
+
 }
 resource "aws_route_table_association" "PublicAZA" {
   subnet_id      = "${aws_subnet.PublicAZA.id}"
