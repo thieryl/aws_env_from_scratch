@@ -1,8 +1,9 @@
 # Create Classic Load balancer
 resource "aws_elb" "ckout_elb" {
   name               = "test-ckout"
-  availability_zones = var.azs
+  subnets = aws_subnet.public.*.id
   security_groups    = [aws_security_group.ckout_elb.id]
+  
 
   listener {
     lb_port           = 80
