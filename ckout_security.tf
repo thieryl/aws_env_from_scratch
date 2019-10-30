@@ -3,7 +3,7 @@ resource "aws_security_group" "webservers" {
   name        = "allow_http"
   description = "Allow http inbound traffic"
 
-  //vpc_id      = "${aws_vpc.main.id}"
+  vpc_id      = "${aws_vpc.main.id}"
 
   ingress {
     from_port   = var.http_port
@@ -58,7 +58,7 @@ resource "aws_security_group" "database" {
 resource "aws_security_group" "ckout_elb" {
   name = "Ckout-ELB"
 
-  //vpc_id = "${aws_vpc.main.id}"
+  vpc_id = "${aws_vpc.main.id}"
 
   ingress {
     from_port   = var.http_port
