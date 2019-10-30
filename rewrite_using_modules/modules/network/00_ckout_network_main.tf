@@ -3,20 +3,18 @@ resource "aws_vpc" "ckout_vpc" {
   enable_dns_hostnames = true
   enable_dns_support = true
 
-  default = true
-
   tags = {
       Name = "${var.env}-vpc"
-      Environment = "${var.env-vpc}"
+      Environment = "${var.env}"
   }
 }
 
-resource "aws_internet_gatewar" "ig" {
-  vpc_id = aws_vpc.ckout_vpc
+resource "aws_internet_gateway" "ig" {
+  vpc_id = aws_vpc.ckout_vpc.id
 
   tags = {
     Name = "${var.env}-ig"
-    Environment = "${var.env-vpc}"
+    Environment = "${var.env}"
   }
 }
 
@@ -30,14 +28,22 @@ resource "aws_nat_gateway" "nat" {
 }
 
 resource "aws_route_table" "public" {
-  vpc_id = "${aws_vpc.vpc.id}"
+  vpc_id = "${aws_vpc.ckout_vpc.id}"
 
-  tags {
-    Name        = "${var.environment}-public-route-table"
-    Environment = "${var.environment}"
+  tags = {
+    Name        = "${var.env}-public-route-table"
+    Environment = "${var.env}"
   }
 }
 
+resource "aws_route_table" "private" {
+  vpc_id = "${aws_vpc.ckout_vpc.id}"
+
+  tags = {
+    Name        = "${var.env}-private-route-table"
+    Environment = var.env
+  }
+}
 resource "aws_route" "public_internet_gateway" {
   route_table_id         = "${aws_route_table.public.id}"
   destination_cidr_block = "0.0.0.0/0"

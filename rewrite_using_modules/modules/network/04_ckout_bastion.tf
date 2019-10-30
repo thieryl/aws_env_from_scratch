@@ -1,5 +1,5 @@
 resource "aws_instance" "bastion" {
-  ami = "${lookup(var.bastion_ami, var.region)}"
+  ami = var.bastion_ami
   instance_type = var.instance_type
   key_name = var.key_name
   monitoring = true
@@ -7,8 +7,8 @@ resource "aws_instance" "bastion" {
   subnet_id = aws_subnet.public_subnet.id
   associate_public_ip_address = true
 
-  tags {
-    Name        = "${var.environment}-bastion"
-    Environment = "${var.environment}"
+  tags = {
+    Name        = "${var.env}-bastion"
+    Environment = var.env
   }
 }

@@ -1,5 +1,5 @@
 # Define variables to be used
-variable "aws_region" {
+variable "region" {
   default     = "eu-west-1"
   description = "Defining the region where everything will run"
 }
@@ -28,17 +28,15 @@ variable "credentialsfile" {
 }
 
 variable "vpc_cidr" {
-  default = "10.20.0.0/16"
+  default = "10.0.0.0/16"
 }
 
 variable "public_subnets_cidr" {
-  type    = list(string)
-  default = ["10.20.1.0/24", "10.20.2.0/24", "10.20.3.0/24"]
+  default = "10.0.1.0/24"
 }
 
 variable "private_subnets_cidr" {
-  type    = list(string)
-  default = ["10.20.4.0/16"]
+  default = "10.0.4.0/24"
 }
 
 variable "azs" {
@@ -50,7 +48,7 @@ variable "webserver-ami" {
   default = "ami-0ce71448843cb18a1"
 }
 
-variable "bastion-ami" {
+variable "bastion_ami" {
   default = "ami-0ce71448843cb18a1"
 }
 

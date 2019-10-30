@@ -1,7 +1,7 @@
 resource "aws_security_group" "default" {
-  name        = "${var.environment}-default-sg"
+  name        = "${var.env}-default-sg"
   description = "Default security group to allow inbound/outbound from the VPC"
-  vpc_id      = aws_vpc.vpc.id
+  vpc_id      = aws_vpc.ckout_vpc.id
 
   ingress {
     from_port = "0"
@@ -17,14 +17,14 @@ resource "aws_security_group" "default" {
     self      = "true"
   }
 
-  tags {
-    Environment = var.environment
+  tags = {
+    Environment = var.env
   }
 }
 
 resource "aws_security_group" "bastion" {
-  vpc_id      = aws_vpc.vpc.id
-  name        = "${var.environment}-bastion-host"
+  vpc_id      = aws_vpc.ckout_vpc.id
+  name        = "${var.env}-bastion-host"
   description = "Allow SSH to bastion host"
 
   ingress {
@@ -48,8 +48,8 @@ resource "aws_security_group" "bastion" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags {
-    Name        = "${var.environment}-bastion-sg"
-    Environment = var.environment
+  tags = {
+    Name        = "${var.env}-bastion-sg"
+    Environment = var.env
   }
 }
