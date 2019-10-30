@@ -8,6 +8,10 @@ variable "availability_zone" {
   default = "eu-west-1a"
 }
 
+variable "env" {
+  default = ""
+}
+
 variable "aws_profile" {
   default     = "default"
   description = "the aws profile to be used"
