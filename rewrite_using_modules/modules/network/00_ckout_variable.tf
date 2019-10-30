@@ -50,6 +50,10 @@ variable "webserver-ami" {
   default = "ami-0ce71448843cb18a1"
 }
 
+variable "bastion-ami" {
+  default = "ami-0ce71448843cb18a1"
+}
+
 variable "instance_type" {
   default = "t2.micro"
 }
