@@ -1,6 +1,7 @@
 *
 !/*.tf
 !/.gitignore
+!/*.md
 !/images
 !/images/**
 !/modules
