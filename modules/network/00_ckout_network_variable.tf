@@ -38,24 +38,6 @@ variable "public_subnets_cidr" {
 variable "private_subnets_cidr" {
   default = "10.0.4.0/24"
 }
-/*
-variable "private_subnets_id" {
-  description = "The id of the private subnet to launch the instances"
-}
-
-variable "public_subnets_id" {
-  description = "The id of the public subnet to launch the load balancer"
-}
-
-variable "vpc_sg_id" {
-  description = "The default security group from the vpc"
-}
-
-variable "azs" {
-  type    = list(string)
-  default = ["eu-west-1a", "eu-west-1b", "eu-west-1c"]
-}
-*/
 variable "webserver-ami" {
   default = "ami-0ce71448843cb18a1"
 }
