@@ -3,7 +3,10 @@
 !/.gitignore
 !/images
 !/images/**
-!/rewrite_using_modules
-!/rewrite_using_modules/**
+!/modules
+!/modules/network
+!/modules/web
+!/modules/network/*.tf
+!/modules/web/*.tf
 
 
