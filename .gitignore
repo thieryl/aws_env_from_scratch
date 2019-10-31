@@ -5,8 +5,14 @@
 !/images/**
 !/modules
 !/modules/network
-!/modules/web
 !/modules/network/*.tf
-!/modules/web/*.tf
+!/modules/network/files
+!/modules/network/files/*.sh
+!/modules/webserver
+!/modules/webserver/*.tf
+!/modules/webserver/files
+!/modules/webserverfiles/*.sh
+!/v1
+!v1/*.tf
 
 
