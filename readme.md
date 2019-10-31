@@ -9,10 +9,10 @@ Our modules folder contains all the shared code to create the pieces of the infr
 
 Terraform will provide us with some commands. Some of them are:
 
-*init* : Initialize a Terraform working directory
-*get* : Download and install modules for the configuration
-*plan* : Displays all the changes that Terraform makes on our infrastructure
-*apply* : Executes all the changes to the infrastructure
-*destroy* : Destroys everything that was created with Terraform
+**init** : Initialize a Terraform working directory
+**get** : Download and install modules for the configuration
+**plan** : Displays all the changes that Terraform makes on our infrastructure
+**apply** : Executes all the changes to the infrastructure
+**destroy** : Destroys everything that was created with Terraform
 
 When you run Terraform inside a directory, it loads ALL .tf files from the directory and execute them (will not load on subfolders). Terraform will first create a graph of the resources to apply only in the final phase, so you don’t need to specify the resources in any specific order. The graph will determine the relations between the resources and ensure that Terraform creates they in the right order.
