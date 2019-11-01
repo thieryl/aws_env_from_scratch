@@ -29,3 +29,6 @@ When you run Terraform inside a directory, it loads ALL .tf files from the direc
 
 # Some commands
 terraform show | grep dns_name
+
+![Curl](images/curl.png)
+
